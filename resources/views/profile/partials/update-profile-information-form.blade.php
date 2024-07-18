@@ -24,6 +24,20 @@
         </div>
 
         <div>
+            <x-input-label for="role" :value="__('Role')" />
+                <select id="role" name="role" class="block mt-1 w-full form-control" required>
+                    <option value="">{{ __('Select Role') }}</option>
+                    @foreach($roleList as $role)
+                        <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                            {{ $role->keterangan }}
+                        </option>
+                    @endforeach
+                </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
