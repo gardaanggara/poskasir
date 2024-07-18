@@ -21,7 +21,18 @@ $(document).ready(function () {
                 title: "Nama Module", 
                 field: "nama_module",
                 sorter: true,
-                width: "90%",
+                width: "80%",
+            },
+            { 
+                title: "Status", 
+                field: "active",
+                sorter: true,
+                width: "20%",
+                formatter: function(cell, formatterParams, onRendered) {
+                    var data = cell.getRow().getData();
+                    var status = data.active == 1 ? 'Aktif' : 'Tidak Aktif';
+                    return `<span>${status}</span>`;
+                }
             }
         ],
         ajaxURL: "/modules/api/data",
@@ -42,6 +53,7 @@ $(document).ready(function () {
                 // Memasukkan data ke dalam modal
                 $("#editId").val(data.id); 
                 $("#editNamaModule").val(data.nama_module); 
+                $("#editAcitve").val(data.active); 
 
                 // Pastikan modal edit ditampilkan setelah data dimuat
                 $('#editModal').modal('show');

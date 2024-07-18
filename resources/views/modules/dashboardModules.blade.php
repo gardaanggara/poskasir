@@ -44,6 +44,14 @@
                             <label for="NamaModule" class="form-label">Nama Module</label>
                             <input type="text" class="form-control" id="NamaModule" name="NamaModule" placeholder="Nama Module" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="active" class="form-label">Status</label>
+                            <select id="active" name="active" class="form-control">
+                                <option value="">Pilih Status</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -53,6 +61,7 @@
             </div>
         </form>
     </div>
+
 
    <!-- Modal Edit Data -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -69,6 +78,14 @@
                         <div class="mb-3">
                             <label for="editNamaModule" class="form-label">Nama Module</label>
                             <input type="text" class="form-control" id="editNamaModule" name="NamaModule">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAcitve" class="form-label">Status</label>
+                            <select id="editAcitve" name="active" class="form-control">
+                                <option value="">Pilih Status</option>
+                                <option value="1">Aktif</option>
+                                <option value="0">Tidak Aktif</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -51,13 +51,15 @@ class ModulesController extends Controller
         // Validasi data yang masuk
         $request->validate([
             'id' => 'nullable|exists:modules,id',
-            'NamaModule' => 'required|string'
+            'NamaModule' => 'required|string',
+            'active' => 'required|string'
         ]);
         if ($request->filled('id')) {
             // Jika ID ada, update item yang sudah ada
             $item = Modules::find($request->id);
             if ($item) {
                 $item->nama_module = $request->NamaModule;
+                $item->active = $request->active;
                 $item->save();
                 return redirect()->back()->with('success', 'Data berhasil diupdate.');
             } else {
@@ -67,6 +69,7 @@ class ModulesController extends Controller
             // Jika ID tidak ada, buat item baru
             $item = new Modules;
             $item->nama_module = $request->NamaModule;
+            $item->active = $request->active;
             $item->save();
             return redirect()->back()->with('success', 'Data berhasil disimpan.');
         }
