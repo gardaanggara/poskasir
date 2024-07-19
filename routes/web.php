@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ModulesController;
+use App\Http\Controllers\User_PrivsController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,14 @@ Route::prefix('modules')->group(function(){
     Route::get('/api/data/{id}', [ModulesController::class, 'getModuleById']); 
     Route::post('/store/{id?}', [ModulesController::class, 'storeOrUpdate'])->name('storeModules');
     Route::delete('/{id?}', [ModulesController::class, 'destroy'])->name('deleteModules');
+});
+
+Route::prefix('user_privs')->group(function(){
+    Route::get('/data', [User_PrivsController::class, 'index'])->name('dashboardUser_Privs');
+    Route::get('/api/data', [User_PrivsController::class, 'getData'])->name('apiDataUser_Privs');
+    Route::get('/api/data/{id}', [User_PrivsController::class, 'getModuleById']); 
+    Route::post('/store/{id?}', [User_PrivsController::class, 'storeOrUpdate'])->name('storeUser_Privs');
+    Route::delete('/{id?}', [User_PrivsController::class, 'destroy'])->name('deleteUser_Privs');
 });
 
 require __DIR__.'/auth.php';

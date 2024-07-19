@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var roleList = new Tabulator("#role-list", {
+    var moduleList = new Tabulator("#user_priv-list", {
         columns: [
             { 
                 title: "Aksi",
@@ -15,50 +15,61 @@ $(document).ready(function () {
                             <ion-icon name="trash-outline"></ion-icon>
                         </button>`;
                 },
-                width: "10%",
+                width: "20%",
             },
             { 
-                title: "Keterangan", 
+                title: "Nama Role", 
                 field: "keterangan",
                 sorter: true,
-                width: "90%",
+                width: "40%",
+            },
+            { 
+                title: "Nama Module", 
+                field: "nama_module",
+                sorter: true,
+                width: "40%",
             }
         ],
-        ajaxURL: "/roles/api/data",
+        ajaxURL: "/user_privs/api/data",
         ajaxConfig: "GET",
         pagination: "remote",
         paginationSize: 10,
         placeholder: "Data tidak tersedia",
     });
 
-    $("#role-list").on("click", ".edit-btn", function () {
+    $("#user_priv-list").on("click", ".edit-btn", function () {
         var id = $(this).data("id");
         console.log("Edit ID: " + id);
+    
         // Ambil data 
         $.ajax({
-            url: '/roles/api/data/' + id,
+            url: '/user_privs/api/data/' + id,
             method: 'GET',
             success: function (data) {
                 // Memasukkan data ke dalam modal
-                $("#editId").val(data.id); 
-                $("#editKeterangan").val(data.keterangan); 
-
+                $("#editId").val(data.id);
+                $("#editRole_id").val(data.role_id);  // Set value for role dropdown
+                $("#editModule_id").val(data.module_id);  // Set value for module dropdown
+    
                 // Pastikan modal edit ditampilkan setelah data dimuat
                 $('#editModal').modal('show');
             }
         });
     });
+    
+    
 
     $('#editModal').on('hidden.bs.modal', function () {
         // Reset dropdown to default value
-        $("#editKeterangan").val('');
+        $("#role_id").val('');
+        $("#module_id").val('');
     });
 
     // Ambil CSRF token dari meta tag
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
 
     // Event handler untuk tombol hapus
-    $("#role-list").on("click", ".delete-btn", function () {
+    $("#user_priv-list").on("click", ".delete-btn", function () {
         var id = $(this).data("id");
 
         // Tampilkan SweetAlert untuk konfirmasi
@@ -75,7 +86,7 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 // Lakukan penghapusan dengan Ajax dan sertakan token CSRF
                 $.ajax({
-                    url: '/roles/' + id,
+                    url: '/user_privs/' + id,
                     method: 'DELETE', // Gunakan metode DELETE
                     headers: {
                         'X-CSRF-TOKEN': csrfToken // Sertakan token CSRF di sini

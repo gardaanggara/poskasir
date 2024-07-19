@@ -82,6 +82,12 @@ $(document).ready(function () {
         });
     });
 
+    $('#editModal').on('hidden.bs.modal', function () {
+        // Reset dropdown to default value
+        $("#editName").val('');
+        $("#editEmail").val('');
+    });
+
 
     // Ambil CSRF token dari meta tag
     var csrfToken = $('meta[name="csrf-token"]').attr('content');
