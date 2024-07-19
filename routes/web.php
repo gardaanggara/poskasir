@@ -5,6 +5,7 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ModulesController;
 use App\Http\Controllers\User_PrivsController;
+use App\Http\Controllers\ReferensiController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,11 @@ Route::prefix('user_privs')->group(function(){
     Route::get('/api/data/{id}', [User_PrivsController::class, 'getModuleById']); 
     Route::post('/store/{id?}', [User_PrivsController::class, 'storeOrUpdate'])->name('storeUser_Privs');
     Route::delete('/{id?}', [User_PrivsController::class, 'destroy'])->name('deleteUser_Privs');
+});
+
+
+Route::prefix('referensi')->group(function(){
+    Route::get('/data', [ReferensiController::class, 'index'])->name('referensi');
 });
 
 require __DIR__.'/auth.php';
